@@ -24,14 +24,17 @@ public class UserService {
     }
 
     public boolean register(User user) {
+        boolean isSuccessful = false;
         if(userDao.findUserByEmail(user.getEmail()) != null) {
             logger.info("이메일 중복");
-            return false;
+            isSuccessful = false;
+        } else {
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+            logger.info("save");
+            userDao.save(user);
+            isSuccessful = true;
         }
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        logger.info("save");
-        userDao.save(user);
 
-        return true;
+        return isSuccessful;
     }
 }
