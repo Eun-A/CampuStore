@@ -18,7 +18,6 @@ import static org.junit.Assert.assertThat;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@TestPropertySource("classpath:/application-local.properties")
 @Transactional
 public class UserServiceTest {
     @Autowired

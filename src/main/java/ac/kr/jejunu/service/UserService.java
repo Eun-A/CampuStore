@@ -5,6 +5,7 @@ import ac.kr.jejunu.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,15 +26,10 @@ public class UserService {
         return userRepository.findUserByEmail(email);
     }
 
-    public boolean register(User user) {
-        if(userRepository.findUserByEmail(user.getEmail()) != null) {
-            logger.info("이메일 중복");
-            return false;
-        }
+    public void register(User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        logger.info("save");
         userRepository.save(user);
-
-        return true;
     }
+
+
 }

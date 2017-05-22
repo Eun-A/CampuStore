@@ -1,5 +1,6 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.typeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport"
@@ -11,16 +12,20 @@
 </head>
 <body>
 <div>
-    <a href="/mypage">마이페이지</a><br/>
-    <a href="/login">로그인</a><br/>
-    <a href="/register">회원가입</a><br/>
+    <div sec:authorize="isAuthenticated()">
+        <a th:href="@{/mypage}">마이페이지</a><br/>
+    </div>
+    <div sec:authorize="isAnonymous()">
+        <a th:href="@{/login}">로그인</a><br/>
+        <a th:href="@{/register}">회원가입</a><br/>
+    </div>
 
     <h1>1</h1>
     <div class="ContentContainer center_align">
         <div data-th-each="app : ${applist}" class="content">
-            <a th:href="@{/contentdetail(app_no=${app.app_no})}">
+            <a th:href="@{/contentdetail(app_no=${app.no})}">
                 <div data-th-text="${app.name}"></div>
-                <div data-th-text="${app.category.category_name}"></div>
+                <div data-th-text="${app.category.name}"></div>
             </a>
         </div>
     </div>

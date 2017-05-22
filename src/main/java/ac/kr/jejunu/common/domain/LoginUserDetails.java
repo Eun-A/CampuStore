@@ -11,10 +11,11 @@ public class LoginUserDetails extends User {
     private static final long serialVersionUID = 1L;
 
     @Getter
-    private long no;
+    private ac.kr.jejunu.common.entity.User user;
 
     public LoginUserDetails(ac.kr.jejunu.common.entity.User user) {
-        super(user.getEmail(), user.getPassword(), AuthorityUtils.createAuthorityList(user.getUserType().name()));
-        no = user.getNo();
+        super(user.getName(), user.getPassword(), AuthorityUtils.createAuthorityList(user.getUserType().name()));
+
+        this.user = user;
     }
 }

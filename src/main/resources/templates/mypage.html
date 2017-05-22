@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.typeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>내 정보</title>
+</head>
+<body>
+<div>
+    <div>
+        <h1 th:text="'E-mail: ' + ${login_user.email}">이메일</h1>
+        <h2 th:text="'이름: ' + ${login_user.name}">이름</h2>
+        <div th:switch="${login_user.userType}">
+            <h2 th:case="${T(ac.kr.jejunu.common.entity.UserType).normal}">타입: 일반 사용자</h2>
+            <h2 th:case="${T(ac.kr.jejunu.common.entity.UserType).student}">타입: 학생</h2>
+            <h2 th:case="${T(ac.kr.jejunu.common.entity.UserType).entrepreneur}">타입: 기업인</h2>
+        </div>
+        <h2 th:text="'인코딩 된 비밀번호: ' + ${login_user.password}">Encoded Password</h2>
+    </div>
+    <div>
+        <a th:href="@{/logout}">로그아웃</a>
+    </div>
+</div>
+</body>
+</html>
