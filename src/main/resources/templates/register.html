@@ -10,7 +10,6 @@
     <form th:action="@{/registerProcessing}" th:object="${user}" method="post">
         <h2>회원가입</h2>
 
-        <!-- 강의를 간결하게 끝내기 위함.. 원래는 가입실패 여부를 자세히 표시해야한다 -->
         <div th:if="${param.error}">
             계정이 중복됩니다.
         </div>

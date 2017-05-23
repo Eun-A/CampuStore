@@ -25,7 +25,7 @@ public class UserService {
     public User getUser(String email) {
         return userRepository.findUserByEmail(email);
     }
-
+    
     public void register(User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
